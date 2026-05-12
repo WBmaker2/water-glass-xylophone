@@ -4,8 +4,6 @@ import { describe, it, vi } from 'vitest'
 import GlassCup from './GlassCup'
 import type { GlassNote } from '../lib/waterTone'
 
-void React
-
 function firePointerEvent(
   element: HTMLElement,
   type: 'pointerDown' | 'pointerMove' | 'pointerUp',
@@ -41,6 +39,7 @@ describe('GlassCup', () => {
     )
 
     const slider = screen.getByRole('slider', { name: '도 물 높이' })
+    expect(slider).toHaveAttribute('aria-orientation', 'vertical')
     expect(slider).toHaveAttribute('aria-valuenow', '80')
 
     const strikeButton = screen.getByRole('button', { name: '도 컵 치기' })
@@ -113,6 +112,87 @@ describe('GlassCup', () => {
 
     expect(onWaterLevelChange).toHaveBeenNthCalledWith(1, 0.5)
     expect(onWaterLevelChange).toHaveBeenNthCalledWith(2, 0.8)
+  })
+
+  it('supports Home/End/PageUp/PageDown and updates ARIA values', () => {
+    const ControlledCup = () => {
+      const [level, setLevel] = React.useState(0.5)
+
+      return (
+        <GlassCup
+          note={baseNote}
+          waterLevel={level}
+          isTargetMatched={false}
+          onWaterLevelChange={(nextLevel) => setLevel(nextLevel)}
+          onStrike={() => {}}
+        />
+      )
+    }
+
+    render(<ControlledCup />)
+
+    const slider = screen.getByRole('slider', { name: '도 물 높이' })
+    fireEvent.keyDown(slider, { key: 'Home' })
+    expect(slider).toHaveAttribute('aria-valuenow', '0')
+    expect(slider).toHaveAttribute(
+      'aria-valuetext',
+      expect.stringContaining('물 0퍼센트'),
+    )
+
+    fireEvent.keyDown(slider, { key: 'End' })
+    expect(slider).toHaveAttribute('aria-valuenow', '100')
+    expect(slider).toHaveAttribute(
+      'aria-valuetext',
+      expect.stringContaining('물 100퍼센트'),
+    )
+
+    fireEvent.keyDown(slider, { key: 'PageDown' })
+    expect(slider).toHaveAttribute('aria-valuenow', '90')
+    expect(slider).toHaveAttribute(
+      'aria-valuetext',
+      expect.stringContaining('물 90퍼센트'),
+    )
+
+    fireEvent.keyDown(slider, { key: 'PageUp' })
+    expect(slider).toHaveAttribute('aria-valuenow', '100')
+    expect(slider).toHaveAttribute(
+      'aria-valuetext',
+      expect.stringContaining('물 100퍼센트'),
+    )
+  })
+
+  it('clamps Home/End/PageUp/PageDown values within 0 to 1', () => {
+    const onWaterLevelChange = vi.fn()
+    const onStrike = vi.fn()
+
+    const { unmount: unmountNearTop } = render(
+      <GlassCup
+        note={baseNote}
+        waterLevel={0.97}
+        isTargetMatched={false}
+        onWaterLevelChange={onWaterLevelChange}
+        onStrike={onStrike}
+      />,
+    )
+
+    const slider = screen.getByRole('slider', { name: '도 물 높이' })
+    fireEvent.keyDown(slider, { key: 'PageUp' })
+    expect(onWaterLevelChange).toHaveBeenCalledWith(1)
+    unmountNearTop()
+
+    const { unmount: unmountNearBottom } = render(
+      <GlassCup
+        note={baseNote}
+        waterLevel={0.03}
+        isTargetMatched={false}
+        onWaterLevelChange={onWaterLevelChange}
+        onStrike={onStrike}
+      />,
+    )
+    const sliderNearBottom = screen.getByRole('slider', { name: '도 물 높이' })
+    fireEvent.keyDown(sliderNearBottom, { key: 'PageDown' })
+    expect(onWaterLevelChange).toHaveBeenLastCalledWith(0)
+    unmountNearBottom()
   })
 
   it('clicking 솔 strike button calls onStrike once', () => {

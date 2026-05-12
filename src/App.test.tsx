@@ -43,6 +43,23 @@ describe('App', () => {
     render(<App />)
 
     expect(screen.getByRole('heading', { name: '연주 미션' })).toBeInTheDocument()
+    expect(screen.getByRole('combobox', { name: '연주 곡 선택' })).toHaveValue(
+      'star-pattern',
+    )
     expect(screen.getByText('도 도 솔 솔 라 라 솔')).toBeInTheDocument()
+  })
+
+  it('changes melody mission when another song is selected', () => {
+    render(<App />)
+
+    const selector = screen.getByRole('combobox', { name: '연주 곡 선택' })
+
+    fireEvent.change(selector, { target: { value: 'scale-up' } })
+    expect(selector).toHaveValue('scale-up')
+    expect(screen.getByText('도 레 미 파 솔 라 시 높은 도')).toBeInTheDocument()
+
+    fireEvent.change(selector, { target: { value: 'rainbow-bridge' } })
+    expect(selector).toHaveValue('rainbow-bridge')
+    expect(screen.getByText('도 레 미 파 솔 파 미 도')).toBeInTheDocument()
   })
 })

@@ -1,7 +1,22 @@
-import { PRACTICE_SONGS } from '../data/songs'
+import { type ChangeEvent } from 'react'
+import { type PracticeSong } from '../data/songs'
 
-export function MelodyPractice() {
-  const song = PRACTICE_SONGS[0]
+type MelodyPracticeProps = {
+  songs: PracticeSong[]
+  selectedSongId: string
+  onSongSelect: (songId: string) => void
+}
+
+export function MelodyPractice({
+  songs,
+  selectedSongId,
+  onSongSelect,
+}: MelodyPracticeProps) {
+  const selectedSong = songs.find((song) => song.id === selectedSongId) ?? songs[0]
+
+  const handleSongChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    onSongSelect(event.target.value)
+  }
 
   return (
     <section
@@ -9,10 +24,25 @@ export function MelodyPractice() {
       aria-labelledby="melody-title"
     >
       <h2 id="melody-title">연주 미션</h2>
-      <p className="melody-title">{song.title}</p>
-      <p className="melody-description">{song.description}</p>
+      <label htmlFor="melody-song-select" className="melody-song-label">
+        연주 곡 선택
+      </label>
+      <select
+        id="melody-song-select"
+        className="melody-song-select"
+        value={selectedSongId}
+        onChange={handleSongChange}
+      >
+        {songs.map((song) => (
+          <option key={song.id} value={song.id}>
+            {song.title}
+          </option>
+        ))}
+      </select>
+      <p className="melody-title">{selectedSong.title}</p>
+      <p className="melody-description">{selectedSong.description}</p>
       <p className="melody-notes" aria-label="연주 음계">
-        {song.notes.join(' ')}
+        {selectedSong.notes.join(' ')}
       </p>
     </section>
   )

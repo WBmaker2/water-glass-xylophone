@@ -325,6 +325,30 @@ h1 {
   font-size: 0.96rem;
 }
 
+.melody-song-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #244b63;
+  margin: 0 0 6px;
+}
+
+.melody-song-select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(79, 124, 162, 0.3);
+  background: #f8fcff;
+  color: #1f3c51;
+  font: inherit;
+  font-size: 0.93rem;
+}
+
+.melody-song-select:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.65);
+  outline-offset: 2px;
+}
+
 .melody-notes {
   margin: 0;
   padding: 10px 12px;

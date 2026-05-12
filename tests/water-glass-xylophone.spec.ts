@@ -21,6 +21,12 @@ test('students can tune and strike the water glass xylophone', async ({
 
   await expect(page.getByRole('heading', { name: '연주 미션' })).toBeVisible()
   await expect(page.getByText('도 도 솔 솔 라 라 솔')).toBeVisible()
+
+  const melodySelect = page.getByRole('combobox', { name: '연주 곡 선택' })
+  await melodySelect.selectOption('scale-up')
+  await expect(
+    page.getByText('도 레 미 파 솔 라 시 높은 도', { exact: false }),
+  ).toBeVisible()
 })
 
 test('layout has no page-level horizontal overflow', async ({ page }) => {

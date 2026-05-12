@@ -26,6 +26,18 @@ npm run build
 npm run e2e
 ```
 
+## 공개 배포 (GitHub Pages)
+
+이 앱은 GitHub Pages용으로 다음 설정을 적용했습니다.
+
+- Vite `base`를 `/water-glass-xylophone/`로 설정해 `/<repo>/` 경로에서 정적 자산이 깨지지 않도록 구성했습니다.
+- `main` 브랜치 push 시 GitHub Actions로 `npm ci → npm run build → dist 업로드 → deploy-pages`가 자동 실행되도록 구성했습니다.
+- 저장소 Settings → Pages → Source는 `GitHub Actions`로 설정합니다.
+
+배포 URL 형식:
+
+- `https://wbmaker2.github.io/water-glass-xylophone/`
+
 ## 교실 사용 흐름
 
 1. 학생이 각 컵의 물 높이를 바꿔 봅니다.

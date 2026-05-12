@@ -18,4 +18,11 @@ export const PRACTICE_SONGS: PracticeSong[] = [
     description: '물이 점점 적은 컵으로 이동하며 높은 소리를 확인합니다.',
     notes: ['도', '레', '미', '파', '솔', '라', '시', '높은 도'],
   },
+  {
+    id: 'rainbow-bridge',
+    title: '무지개 한 바퀴',
+    description:
+      '짧은 후렴으로 음을 오르내리며 시작점(도)으로 돌아오는 연주 미션입니다.',
+    notes: ['도', '레', '미', '파', '솔', '파', '미', '도'],
+  },
 ]

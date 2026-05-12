@@ -72,16 +72,32 @@ export function GlassCup({
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'ArrowUp') {
+    const deltaByKey: Record<string, number> = {
+      ArrowUp: 0.05,
+      ArrowDown: -0.05,
+      PageUp: 0.1,
+      PageDown: -0.1,
+    }
+
+    if (event.key === 'Home') {
       event.preventDefault()
-      onWaterLevelChange(roundToTwoDecimals(waterLevel + 0.05))
+      onWaterLevelChange(0)
       return
     }
 
-    if (event.key === 'ArrowDown') {
+    if (event.key === 'End') {
       event.preventDefault()
-      onWaterLevelChange(roundToTwoDecimals(waterLevel - 0.05))
+      onWaterLevelChange(1)
+      return
     }
+
+    const delta = deltaByKey[event.key]
+    if (delta === undefined) {
+      return
+    }
+
+    event.preventDefault()
+    onWaterLevelChange(roundToTwoDecimals(waterLevel + delta))
   }
 
   return (
@@ -105,6 +121,7 @@ export function GlassCup({
         aria-valuemax={100}
         aria-valuenow={waterPercent}
         aria-valuetext={ariaValueText}
+        aria-orientation="vertical"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUpOrCancel}

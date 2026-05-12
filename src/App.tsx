@@ -3,6 +3,7 @@ import { GlassCup } from './components/GlassCup'
 import { TuningMission } from './components/TuningMission'
 import { MelodyPractice } from './components/MelodyPractice'
 import { useWaterGlassAudio } from './hooks/useWaterGlassAudio'
+import { PRACTICE_SONGS } from './data/songs'
 import {
   GLASS_NOTES,
   frequencyForWaterLevel,
@@ -18,6 +19,7 @@ export default function App() {
   )
   const [waterLevels, setWaterLevels] = useState<number[]>(targetLevels)
   const [status, setStatus] = useState('실험 준비가 되었습니다.')
+  const [selectedSongId, setSelectedSongId] = useState(PRACTICE_SONGS[0].id)
   const { playTone } = useWaterGlassAudio()
 
   const matchedNotes = useMemo(
@@ -99,7 +101,11 @@ export default function App() {
         </section>
         <aside className="side-panel" aria-label="수업 미션">
           <TuningMission waterLevels={waterLevels} />
-          <MelodyPractice />
+          <MelodyPractice
+            songs={PRACTICE_SONGS}
+            selectedSongId={selectedSongId}
+            onSongSelect={setSelectedSongId}
+          />
         </aside>
       </section>
     </main>
