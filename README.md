@@ -36,6 +36,10 @@ npm run e2e
 
 - 교사용 지도안: [docs/classroom-guide.md](docs/classroom-guide.md)
 - 학생 활동지: [docs/student-worksheet.md](docs/student-worksheet.md)
+- 교사용 빠른 시작 안내: [docs/teacher-quick-start.md](docs/teacher-quick-start.md)
+- 학생용 인쇄 활동지: [docs/student-worksheet-print.html](docs/student-worksheet-print.html)
+- 학생용 활동지 PDF: [docs/student-worksheet-print.pdf](docs/student-worksheet-print.pdf)
+- 공개 URL QR 코드: [docs/assets/water-glass-xylophone-qr.png](docs/assets/water-glass-xylophone-qr.png)
 
 ## HVC 등록 상태
 

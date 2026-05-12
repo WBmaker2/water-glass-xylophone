@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>학생 활동지 - 찰랑찰랑 디지털 물컵 실로폰</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: #142536;
+        font-family:
+          "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 25px;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 14px 0 7px;
+        font-size: 15px;
+        border-bottom: 1px solid #9bb6c8;
+        padding-bottom: 3px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1fr 92px;
+        gap: 14px;
+        align-items: start;
+        border-bottom: 3px solid #2b6684;
+        padding-bottom: 10px;
+      }
+
+      .meta {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .blank {
+        display: inline-block;
+        min-width: 92px;
+        border-bottom: 1px solid #142536;
+        height: 16px;
+        vertical-align: bottom;
+      }
+
+      .qr {
+        width: 92px;
+        height: 92px;
+      }
+
+      .url {
+        margin-top: 4px;
+        font-size: 10px;
+        word-break: break-all;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6px;
+      }
+
+      th,
+      td {
+        border: 1px solid #aebfca;
+        padding: 5px;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eaf5fb;
+        font-weight: 700;
+      }
+
+      .line {
+        border-bottom: 1px solid #7f95a5;
+        min-height: 24px;
+        margin-top: 5px;
+      }
+
+      .choices {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+
+      .compact-list {
+        margin: 6px 0 0;
+        padding-left: 18px;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div>
+        <p>3~4학년 과학 / 음악</p>
+        <h1>찰랑찰랑 디지털 물컵 실로폰</h1>
+        <div class="meta">
+          <span>이름 <span class="blank"></span></span>
+          <span>반 <span class="blank"></span></span>
+          <span>날짜 <span class="blank"></span></span>
+        </div>
+      </div>
+      <div>
+        <img
+          class="qr"
+          src="assets/water-glass-xylophone-qr.png"
+          alt="Water Glass Xylophone QR"
+        />
+        <p class="url">https://wbmaker2.github.io/water-glass-xylophone/</p>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. 예상하기</h2>
+      <p>물이 많아지면 소리는 어떻게 변할까요?</p>
+      <div class="choices">
+        <span>□ 높아진다</span>
+        <span>□ 낮아진다</span>
+        <span>□ 거의 같다</span>
+      </div>
+      <div class="line">예상 이유:</div>
+    </section>
+
+    <section>
+      <h2>2. 물 높이 조절 실험</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>컵</th>
+            <th>물 높이</th>
+            <th>들은 소리</th>
+            <th>관찰 메모</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>□ 낮음 □ 중간 □ 높음</td>
+            <td>□ 낮아짐 □ 높아짐 □ 비슷함</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>□ 낮음 □ 중간 □ 높음</td>
+            <td>□ 낮아짐 □ 높아짐 □ 비슷함</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>□ 낮음 □ 중간 □ 높음</td>
+            <td>□ 낮아짐 □ 높아짐 □ 비슷함</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="two-column">
+      <div>
+        <h2>3. 도레미 튜닝</h2>
+        <ul class="compact-list">
+          <li>목표 음에 가까운 컵: ____ / 8</li>
+          <li>가장 맞추기 쉬운 음: ____</li>
+          <li>가장 맞추기 어려운 음: ____</li>
+        </ul>
+      </div>
+      <div>
+        <h2>4. 짧은 연주</h2>
+        <p>선택한 연주 곡: <span class="blank"></span></p>
+        <div class="choices">
+          <span>□ 1회</span>
+          <span>□ 2회</span>
+          <span>□ 3회</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. 정리하기</h2>
+      <div class="line">물의 양과 소리의 높낮이 관계:</div>
+      <div class="line">오늘 실험에서 알게 된 점:</div>
+      <div class="line">다음에 더 해보고 싶은 실험:</div>
+    </section>
+  </body>
+</html>
