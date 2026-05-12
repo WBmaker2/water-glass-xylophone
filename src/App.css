@@ -63,3 +63,119 @@ h1 {
   white-space: nowrap;
   border: 0;
 }
+
+.glass-cup {
+  width: min(190px, 100%);
+  padding: 12px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 252, 255, 0.95),
+    rgba(225, 241, 254, 0.88)
+  );
+  border: 1px solid rgba(70, 110, 135, 0.2);
+  box-shadow: 0 6px 16px rgba(7, 44, 73, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.glass-cup--matched .glass-body {
+  border-color: rgba(16, 185, 129, 0.65);
+  box-shadow:
+    inset 0 0 0 2px rgba(16, 185, 129, 0.32),
+    0 0 0 1px rgba(16, 185, 129, 0.25),
+    0 8px 18px rgba(16, 185, 129, 0.12);
+}
+
+.strike-pad {
+  width: 100%;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.65rem 0.85rem;
+  background: linear-gradient(180deg, #2c3eff, #3148c6);
+  color: #f8faff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    filter 120ms ease;
+}
+
+.strike-pad:hover {
+  filter: brightness(1.04);
+}
+
+.strike-pad:active {
+  transform: translateY(1px);
+}
+
+.strike-pad:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.65);
+  outline-offset: 2px;
+}
+
+.glass-body {
+  position: relative;
+  width: 100%;
+  max-width: 150px;
+  min-height: 180px;
+  height: clamp(150px, 26vh, 208px);
+  border-radius: 0 0 28px 28px / 0 0 48px 48px;
+  border: 3px solid rgba(95, 124, 149, 0.7);
+  background: linear-gradient(180deg, #f3fbff 0%, #dbefff 65%, #bdd8ff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.glass-body:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.72);
+  outline-offset: 3px;
+}
+
+.water-fill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #6db5ff 0%, #3a89f9 55%, #2a66d1 100%);
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  transition: height 0.15s ease;
+}
+
+.water-fill::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  bottom: 20%;
+}
+
+.glass-shine {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.35)
+  );
+  pointer-events: none;
+}
+
+.cup-label {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #233747;
+}
