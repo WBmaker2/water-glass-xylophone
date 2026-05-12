@@ -5,16 +5,26 @@ export type PlayToneOptions = {
   duration?: number
 }
 
+type BrowserWindowWithAudio = Window &
+  typeof globalThis & {
+    webkitAudioContext?: typeof AudioContext
+  }
+
 export function useWaterGlassAudio() {
   const audioContextRef = useRef<AudioContext | null>(null)
 
   const ensureAudioContext = useCallback((): AudioContext | null => {
-    if (typeof AudioContext === 'undefined') {
+    const AudioContextConstructor =
+      typeof AudioContext !== 'undefined'
+        ? AudioContext
+        : (window as BrowserWindowWithAudio).webkitAudioContext
+
+    if (!AudioContextConstructor) {
       return null
     }
 
     if (audioContextRef.current == null) {
-      audioContextRef.current = new AudioContext()
+      audioContextRef.current = new AudioContextConstructor()
     }
 
     return audioContextRef.current
@@ -28,8 +38,12 @@ export function useWaterGlassAudio() {
         return
       }
 
-      if (context.state === 'suspended') {
-        await context.resume()
+      try {
+        if (context.state === 'suspended') {
+          await context.resume()
+        }
+      } catch {
+        return
       }
 
       const now = context.currentTime
@@ -45,6 +59,10 @@ export function useWaterGlassAudio() {
 
       oscillator.connect(gainNode)
       gainNode.connect(context.destination)
+      oscillator.onended = () => {
+        oscillator.disconnect()
+        gainNode.disconnect()
+      }
 
       oscillator.start(now)
       oscillator.stop(now + duration + 0.04)
