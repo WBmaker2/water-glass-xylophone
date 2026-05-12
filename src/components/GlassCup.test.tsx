@@ -1,10 +1,21 @@
 import React from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { createEvent, fireEvent, render, screen } from '@testing-library/react'
 import { describe, it, vi } from 'vitest'
 import GlassCup from './GlassCup'
 import type { GlassNote } from '../lib/waterTone'
 
 void React
+
+function firePointerEvent(
+  element: HTMLElement,
+  type: 'pointerDown' | 'pointerMove' | 'pointerUp',
+  clientY: number,
+) {
+  const event = createEvent[type](element, { bubbles: true })
+  Object.defineProperty(event, 'clientY', { value: clientY })
+  Object.defineProperty(event, 'pointerId', { value: 1 })
+  fireEvent(element, event)
+}
 
 describe('GlassCup', () => {
   const baseNote: GlassNote = {
@@ -62,6 +73,46 @@ describe('GlassCup', () => {
 
     expect(onWaterLevelChange).toHaveBeenCalledTimes(1)
     expect(onWaterLevelChange).toHaveBeenCalledWith(0.55)
+  })
+
+  it('changes water level from pointer position while dragging', () => {
+    const onWaterLevelChange = vi.fn()
+    const onStrike = vi.fn()
+
+    render(
+      <GlassCup
+        note={baseNote}
+        waterLevel={0.2}
+        isTargetMatched={false}
+        onWaterLevelChange={onWaterLevelChange}
+        onStrike={onStrike}
+      />,
+    )
+
+    const slider = screen.getByRole('slider', { name: '도 물 높이' })
+    vi.spyOn(slider, 'getBoundingClientRect').mockReturnValue({
+      bottom: 200,
+      height: 100,
+      left: 0,
+      right: 80,
+      top: 100,
+      width: 80,
+      x: 0,
+      y: 100,
+      toJSON: () => {},
+    } as DOMRect)
+    Object.assign(slider, {
+      hasPointerCapture: vi.fn(() => true),
+      releasePointerCapture: vi.fn(),
+      setPointerCapture: vi.fn(),
+    })
+
+    firePointerEvent(slider, 'pointerDown', 150)
+    firePointerEvent(slider, 'pointerMove', 120)
+    firePointerEvent(slider, 'pointerUp', 120)
+
+    expect(onWaterLevelChange).toHaveBeenNthCalledWith(1, 0.5)
+    expect(onWaterLevelChange).toHaveBeenNthCalledWith(2, 0.8)
   })
 
   it('clicking 솔 strike button calls onStrike once', () => {

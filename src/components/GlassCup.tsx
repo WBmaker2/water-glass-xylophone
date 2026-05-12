@@ -66,7 +66,9 @@ export function GlassCup({
       return
     }
     capturedPointerIdRef.current = null
-    event.currentTarget.releasePointerCapture(event.pointerId)
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
