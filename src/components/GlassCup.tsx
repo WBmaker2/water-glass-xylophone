@@ -18,7 +18,7 @@ function roundToTwoDecimals(value: number): number {
   return Number(clampWaterLevel(value).toFixed(2))
 }
 
-export default function GlassCup({
+export function GlassCup({
   note,
   waterLevel,
   isTargetMatched,
@@ -92,7 +92,7 @@ export default function GlassCup({
         aria-label={`${note.solfege} 컵 치기`}
         onClick={onStrike}
       >
-        {note.solfege} 컵 치기
+        <span aria-hidden="true">♪</span>
       </button>
       <div
         className="glass-body"
@@ -112,7 +112,12 @@ export default function GlassCup({
         <div className="water-fill" style={{ height: `${waterPercent}%` }} />
         <div className="glass-shine" />
       </div>
-      <p className="cup-label">{`${note.solfege} (${note.western})`}</p>
+      <div className="cup-label">
+        <strong>{note.solfege}</strong>
+        <span>{note.western}</span>
+      </div>
     </article>
   )
 }
+
+export default GlassCup

@@ -90,15 +90,17 @@ h1 {
 }
 
 .strike-pad {
-  width: 100%;
-  border: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #9cb4c1;
   border-radius: 9999px;
-  padding: 0.65rem 0.85rem;
-  background: linear-gradient(180deg, #2c3eff, #3148c6);
-  color: #f8faff;
+  padding: 0;
+  background: #fffdf5;
+  color: #33414a;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(45, 77, 96, 0.12);
   transition:
     transform 120ms ease,
     filter 120ms ease;
@@ -174,8 +176,18 @@ h1 {
 }
 
 .cup-label {
-  margin: 0;
-  font-size: 0.92rem;
-  font-weight: 700;
+  display: grid;
+  gap: 2px;
+  min-height: 48px;
+  text-align: center;
+}
+
+.cup-label strong {
   color: #233747;
+  font-size: 1rem;
+}
+
+.cup-label span {
+  color: #526b78;
+  font-size: 0.8rem;
 }
