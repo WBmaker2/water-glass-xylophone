@@ -26,17 +26,21 @@ npm run build
 npm run e2e
 ```
 
-## 공개 배포 (GitHub Pages)
+## 공개 배포
 
-이 앱은 GitHub Pages용으로 다음 설정을 적용했습니다.
+### 공개 URL
+- https://wbmaker2.github.io/water-glass-xylophone/
+- GitHub 저장소: https://github.com/WBmaker2/water-glass-xylophone
 
-- Vite `base`를 `/water-glass-xylophone/`로 설정해 `/<repo>/` 경로에서 정적 자산이 깨지지 않도록 구성했습니다.
-- `main` 브랜치 push 시 GitHub Actions로 `npm ci → npm run build → dist 업로드 → deploy-pages`가 자동 실행되도록 구성했습니다.
-- 저장소 Settings → Pages → Source는 `GitHub Actions`로 설정합니다.
+## 수업 자료
 
-배포 URL 형식:
+- 교사용 지도안: [docs/classroom-guide.md](docs/classroom-guide.md)
+- 학생 활동지: [docs/student-worksheet.md](docs/student-worksheet.md)
 
-- `https://wbmaker2.github.io/water-glass-xylophone/`
+## HVC 등록 상태
+
+- HVC admin DB 등록 완료 (ID: `422f88e0-ac58-42c6-afa4-9d557979eaf8`)
+- public static gallery sync는 이번 요청에서 실행하지 않았고, 별도 단계로 진행합니다.
 
 ## 교실 사용 흐름
 
