@@ -22,11 +22,15 @@ describe('waterTone model', () => {
   it('defines GLASS_NOTES in ascending pitch order with water level metadata', () => {
     expect(GLASS_NOTES).toHaveLength(8)
     expect(GLASS_NOTES[0]).toMatchObject({
+      id: 'c4',
       solfege: '도',
+      western: 'C4',
       frequency: 261.63,
     })
     expect(GLASS_NOTES[7]).toMatchObject({
+      id: 'c5',
       solfege: '높은 도',
+      western: 'C5',
       frequency: 523.25,
     })
     expect(GLASS_NOTES[0].targetWaterLevel).toBeGreaterThan(

@@ -1,4 +1,5 @@
 export type GlassNote = {
+  id: string
   solfege: string
   western: string
   frequency: number
@@ -7,7 +8,7 @@ export type GlassNote = {
 
 export type TuningDifference = {
   cents: number
-  label: string
+  label: '조금 높습니다' | '조금 낮습니다' | '잘 맞았습니다'
 }
 
 export const LOWEST_FREQUENCY = 261.63
@@ -15,24 +16,30 @@ export const HIGHEST_FREQUENCY = 523.25
 
 const ratio = LOWEST_FREQUENCY / HIGHEST_FREQUENCY
 
-export const GLASS_NOTES: GlassNote[] = [
-  { solfege: '도', western: 'C4', frequency: 261.63 },
-  { solfege: '레', western: 'D4', frequency: 293.66 },
-  { solfege: '미', western: 'E4', frequency: 329.63 },
-  { solfege: '파', western: 'F4', frequency: 349.23 },
-  { solfege: '솔', western: 'G4', frequency: 392.0 },
-  { solfege: '라', western: 'A4', frequency: 440.0 },
-  { solfege: '시', western: 'B4', frequency: 493.88 },
-  { solfege: '높은 도', western: 'C5', frequency: 523.25 },
-].map((note) => ({
-  ...note,
-  targetWaterLevel: Number(
-    (
-      (Math.log(note.frequency / HIGHEST_FREQUENCY) /
-        Math.log(ratio))
-    ).toFixed(12),
-  ),
-}))
+const noteSeeds = [
+  ['c4', '도', 'C4', 261.63],
+  ['d4', '레', 'D4', 293.66],
+  ['e4', '미', 'E4', 329.63],
+  ['f4', '파', 'F4', 349.23],
+  ['g4', '솔', 'G4', 392.0],
+  ['a4', '라', 'A4', 440.0],
+  ['b4', '시', 'B4', 493.88],
+  ['c5', '높은 도', 'C5', 523.25],
+] as const
+
+export const GLASS_NOTES: GlassNote[] = noteSeeds.map(
+  ([id, solfege, western, frequency]) => ({
+    id,
+    solfege,
+    western,
+    frequency,
+    targetWaterLevel: Number(
+      (
+        Math.log(frequency / HIGHEST_FREQUENCY) / Math.log(ratio)
+      ).toFixed(12),
+    ),
+  }),
+)
 
 export function clampWaterLevel(level: number): number {
   if (!Number.isFinite(level)) {
