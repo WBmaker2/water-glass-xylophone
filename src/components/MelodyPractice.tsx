@@ -12,7 +12,7 @@ export function MelodyPractice() {
       <p className="melody-title">{song.title}</p>
       <p className="melody-description">{song.description}</p>
       <p className="melody-notes" aria-label="연주 음계">
-        도 도 솔 솔 라 라 솔
+        {song.notes.join(' ')}
       </p>
     </section>
   )
