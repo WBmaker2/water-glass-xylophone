@@ -27,6 +27,18 @@ describe('App', () => {
     )
   })
 
+  it('updates the tuning mission count when a cup moves away from its target', () => {
+    render(<App />)
+
+    expect(screen.getByText('목표 음에 가까운 컵: 8/8')).toBeInTheDocument()
+
+    fireEvent.keyDown(screen.getByRole('slider', { name: '도 물 높이' }), {
+      key: 'ArrowDown',
+    })
+
+    expect(screen.getByText('목표 음에 가까운 컵: 7/8')).toBeInTheDocument()
+  })
+
   it('shows melody mission and target note sequence', () => {
     render(<App />)
 
